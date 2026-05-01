@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* フォントエイリアス */
+:root {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+}
+
+.font-sans-jp {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+}
+
+.font-display {
+  font-family: 'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+  font-weight: 700;
+}
+
+/* ハイライトアニメーション */
+@keyframes highlight-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+}
+.highlight-pulse {
+  animation: highlight-pulse 1.5s ease-in-out 3;
+}
+
+/* スクロールシャドウ(任意) */
+.scroll-shadow {
+  scrollbar-width: thin;
+}
+
+/* iOS Safariでの拡大防止: input fontSize 16px以上 */
+input[type="text"], input[type="number"], input[type="date"] {
+  font-size: 16px;
+}
