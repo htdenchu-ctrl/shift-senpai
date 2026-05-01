@@ -3898,8 +3898,9 @@ function CalendarView({ days, dateStrs, helpNeeded, helpAssignments, requiredByD
 }
 
 // ============== スタッフ管理 ==============
-function StaffManagement({ staff, ...
-    <div>
+function StaffManagement({ staff, addStaff, updateStaff, removeStaff, onResetAll, monthlyOverrides = {}, setMonthlyStaffOverride, resetMonthlyStaffOverride, periodMonth, defaultRequiredConfig, setDefaultRequiredConfig, appConfig, setAppConfig }) {
+  return (
+<div>
     {/* 店舗名設定 (Phase 1-α) */}
       <div className="mb-6 p-4 bg-stone-50 border border-stone-300">
         <label className="block">
