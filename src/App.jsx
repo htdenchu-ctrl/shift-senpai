@@ -2673,6 +2673,8 @@ export default function ShiftTool() {
             periodMonth={periodMonth}
             defaultRequiredConfig={defaultRequiredConfig}
             setDefaultRequiredConfig={setDefaultRequiredConfig}
+            appConfig={appConfig}
+            setAppConfig={setAppConfig}
           />
         )}
 
@@ -3896,9 +3898,24 @@ function CalendarView({ days, dateStrs, helpNeeded, helpAssignments, requiredByD
 }
 
 // ============== スタッフ管理 ==============
-function StaffManagement({ staff, addStaff, updateStaff, removeStaff, onResetAll, monthlyOverrides = {}, setMonthlyStaffOverride, resetMonthlyStaffOverride, periodMonth, defaultRequiredConfig, setDefaultRequiredConfig }) {
-  return (
+function StaffManagement({ staff, ...
     <div>
+    {/* 店舗名設定 (Phase 1-α) */}
+      <div className="mb-6 p-4 bg-stone-50 border border-stone-300">
+        <label className="block">
+          <span className="text-sm font-medium text-stone-700 font-sans-jp">店舗名</span>
+          <input
+            type="text"
+            value={appConfig?.storeName ?? ''}
+            onChange={(e) => setAppConfig({ ...appConfig, storeName: e.target.value })}
+            placeholder="例: Shift Atelier"
+            className="mt-1 w-full px-3 py-2 border border-stone-300 focus:outline-none focus:border-red-800 bg-white"
+          />
+          <span className="text-[11px] text-stone-500 font-sans-jp mt-1 block">
+            ※ 変更するとヘッダーに反映されます
+          </span>
+        </label>
+      </div>
       <div className="flex justify-between items-end mb-6 gap-3 flex-wrap">
         <div>
           <h2 className="font-display text-2xl">スタッフ管理</h2>
