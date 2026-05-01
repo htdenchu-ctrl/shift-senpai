@@ -82,7 +82,11 @@ const isAnyWork = (s) => s && s !== 'OFF' && s !== 'REQUEST_OFF';
 const isStoreWorkShift = (s) => isWorkShift(s) && !isTripShift(s);
 
 const STAFF_TYPE = { EMPLOYEE: 'EMPLOYEE', MAMA: 'MAMA' };
-
+// ============== アプリ設定 (Phase 0-A) ==============
+// 将来的にユーザーが設定画面から変更可能にする値の集約場所
+const DEFAULT_APP_CONFIG = {
+  storeName: 'Shift Atelier',
+};
 // ============== 日付ユーティリティ ==============
 const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 
@@ -1112,6 +1116,7 @@ export default function ShiftTool() {
   const [defaultRequiredConfig, setDefaultRequiredConfig] = useState(() =>
     loadFromStorage('defaultRequiredConfig', { 0: 3, 1: 3, 2: 3, 3: 3, 4: 3, 5: 3, 6: 4, holiday: 3 })
   );
+  const [appConfig, setAppConfig] = useState(() => loadFromStorage('appConfig', DEFAULT_APP_CONFIG));
   const [activeTab, setActiveTab] = useState('shift');
   const [selectedStaffId, setSelectedStaffId] = useState(null);
   const [editingCell, setEditingCell] = useState(null);
@@ -1233,7 +1238,7 @@ export default function ShiftTool() {
   useEffect(() => { saveToStorage('appliedActions', appliedActions); }, [appliedActions]);
   useEffect(() => { saveToStorage('monthlyOverrides', monthlyOverrides); }, [monthlyOverrides]);
   useEffect(() => { saveToStorage('defaultRequiredConfig', defaultRequiredConfig); }, [defaultRequiredConfig]);
-
+  useEffect(() => { saveToStorage('appConfig', appConfig); }, [appConfig]);
   // 旧形式(MT_EARLY/MT_MIDDLE/MT_LATE)データを新形式('MT')に1度だけマイグレーション
   useEffect(() => {
     // fixedShifts に旧形式が残っていれば 'MT' に置換
@@ -2511,7 +2516,7 @@ export default function ShiftTool() {
             <div className="flex items-center gap-2 sm:gap-5">
               <div className="seal">勤務表</div>
               <div>
-                <h1 className="font-display text-lg sm:text-3xl font-medium tracking-wide">Shift Atelier</h1>
+                <h1 className="font-display text-lg sm:text-3xl font-medium tracking-wide">{appConfig.storeName}</h1>
                 <p className="hidden sm:block text-[10px] sm:text-xs text-stone-500 tracking-[0.2em] sm:tracking-[0.3em] mt-0.5 font-sans-jp">シフト自動編成システム</p>
               </div>
             </div>
