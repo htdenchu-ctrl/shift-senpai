@@ -82,7 +82,11 @@ const isAnyWork = (s) => s && s !== 'OFF' && s !== 'REQUEST_OFF';
 const isStoreWorkShift = (s) => isWorkShift(s) && !isTripShift(s);
 
 const STAFF_TYPE = { EMPLOYEE: 'EMPLOYEE', MAMA: 'MAMA' };
-
+// ============== アプリ設定 (Phase 0-A) ==============
+// 将来的にユーザーが設定画面から変更可能にする値の集約場所
+const DEFAULT_APP_CONFIG = {
+  storeName: 'Shift Atelier',
+};
 // ============== 日付ユーティリティ ==============
 const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 
